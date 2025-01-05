@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { cn } from "../../utils/cn"
 
-const SidebarGroup = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
+export const SidebarGroup = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
   ({ className, ...props }, ref) => {
     return (
       <div

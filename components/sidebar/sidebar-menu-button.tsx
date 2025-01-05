@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 import { VariantProps } from "class-variance-authority"
 import { Slot } from "@radix-ui/react-slot"
