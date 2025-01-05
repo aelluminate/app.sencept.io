@@ -1,3 +1,5 @@
+import { Sidebar } from "../components/sidebar/_index"
+
 export default function Home() {
-  return <main>Hello</main>
+  return <main></main>
 }
