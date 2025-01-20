@@ -1,13 +1,14 @@
 "use client"
-
 import * as React from "react"
-import { VariantProps } from "class-variance-authority"
-import { Slot } from "@radix-ui/react-slot"
 
-import { cn } from "../../../utils/cn"
-import { useSidebar } from "../../../hooks/use-sidebar"
-import { sidebarMenuButtonVariants } from "../../../lib/variants"
-import { Tooltip, TooltipContent, TooltipTrigger } from "../tooltip/_index"
+import { Slot } from "@radix-ui/react-slot"
+import { type VariantProps } from "class-variance-authority"
+
+import { cn } from "@/lib/utils"
+import { useSidebar } from "@/hooks/use-sidebar"
+import { sidebarMenuButtonVariants } from "@/lib/variants"
+
+import { TooltipContent, Tooltip, TooltipTrigger } from "@/components/shared/tooltip/_index"
 
 export const SidebarMenuButton = React.forwardRef<
   HTMLButtonElement,
@@ -66,5 +67,4 @@ export const SidebarMenuButton = React.forwardRef<
     )
   },
 )
-
 SidebarMenuButton.displayName = "SidebarMenuButton"

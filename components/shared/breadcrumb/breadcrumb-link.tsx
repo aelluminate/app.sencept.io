@@ -1,9 +1,8 @@
-"use client"
-
 import * as React from "react"
+
 import { Slot } from "@radix-ui/react-slot"
 
-import { cn } from "../../../utils/cn"
+import { cn } from "@/lib/utils"
 
 export const BreadcrumbLink = React.forwardRef<
   HTMLAnchorElement,
@@ -21,5 +20,4 @@ export const BreadcrumbLink = React.forwardRef<
     />
   )
 })
-
 BreadcrumbLink.displayName = "BreadcrumbLink"

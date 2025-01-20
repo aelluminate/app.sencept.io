@@ -1,6 +1,8 @@
 "use client"
 
-import { cn } from "../../../utils/cn"
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
 
 export const DropdownMenuShortcut = ({
   className,
@@ -8,5 +10,4 @@ export const DropdownMenuShortcut = ({
 }: React.HTMLAttributes<HTMLSpanElement>) => {
   return <span className={cn("ml-auto text-xs tracking-widest opacity-60", className)} {...props} />
 }
-
 DropdownMenuShortcut.displayName = "DropdownMenuShortcut"

@@ -1,8 +1,6 @@
-"use client"
-
 import * as React from "react"
 
-import { cn } from "../../../utils/cn"
+import { cn } from "@/lib/utils"
 
 export const SidebarMenu = React.forwardRef<HTMLUListElement, React.ComponentProps<"ul">>(
   ({ className, ...props }, ref) => (
@@ -14,5 +12,4 @@ export const SidebarMenu = React.forwardRef<HTMLUListElement, React.ComponentPro
     />
   ),
 )
-
 SidebarMenu.displayName = "SidebarMenu"

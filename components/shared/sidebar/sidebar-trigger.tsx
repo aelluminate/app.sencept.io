@@ -1,14 +1,15 @@
 "use client"
-
 import * as React from "react"
+
 import { PanelLeft } from "lucide-react"
 
-import { cn } from "../../../utils/cn"
-import { Button } from "../button/_index"
-import { useSidebar } from "../../../hooks/use-sidebar"
+import { cn } from "@/lib/utils"
+import { useSidebar } from "@/hooks/use-sidebar"
+
+import { Button } from "@/components/shared/button/_index"
 
 export const SidebarTrigger = React.forwardRef<
-  React.ElementRef<typeof Button>,
+  React.ComponentRef<typeof Button>,
   React.ComponentProps<typeof Button>
 >(({ className, onClick, ...props }, ref) => {
   const { toggleSidebar } = useSidebar()
@@ -19,7 +20,7 @@ export const SidebarTrigger = React.forwardRef<
       data-sidebar="trigger"
       variant="ghost"
       size="icon"
-      className={cn("h-4 w-4", className)}
+      className={cn("h-7 w-7", className)}
       onClick={(event) => {
         onClick?.(event)
         toggleSidebar()
@@ -31,5 +32,4 @@ export const SidebarTrigger = React.forwardRef<
     </Button>
   )
 })
-
 SidebarTrigger.displayName = "SidebarTrigger"

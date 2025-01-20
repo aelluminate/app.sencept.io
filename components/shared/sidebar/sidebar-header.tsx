@@ -1,8 +1,6 @@
-"use client"
-
 import * as React from "react"
 
-import { cn } from "../../../utils/cn"
+import { cn } from "@/lib/utils"
 
 export const SidebarHeader = React.forwardRef<HTMLDivElement, React.ComponentProps<"div">>(
   ({ className, ...props }, ref) => {
@@ -16,5 +14,4 @@ export const SidebarHeader = React.forwardRef<HTMLDivElement, React.ComponentPro
     )
   },
 )
-
 SidebarHeader.displayName = "SidebarHeader"

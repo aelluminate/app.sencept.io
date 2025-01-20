@@ -1,9 +1,10 @@
 "use client"
 
 import * as React from "react"
+
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
 
-import { cn } from "../../../utils/cn"
+import { cn } from "@/lib/utils"
 
 export const DropdownMenuLabel = React.forwardRef<
   React.ElementRef<typeof DropdownMenuPrimitive.Label>,
@@ -17,5 +18,4 @@ export const DropdownMenuLabel = React.forwardRef<
     {...props}
   />
 ))
-
 DropdownMenuLabel.displayName = DropdownMenuPrimitive.Label.displayName

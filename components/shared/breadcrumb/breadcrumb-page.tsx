@@ -1,8 +1,6 @@
-"use client"
-
 import * as React from "react"
 
-import { cn } from "../../../utils/cn"
+import { cn } from "@/lib/utils"
 
 export const BreadcrumbPage = React.forwardRef<
   HTMLSpanElement,
@@ -17,5 +15,4 @@ export const BreadcrumbPage = React.forwardRef<
     {...props}
   />
 ))
-
 BreadcrumbPage.displayName = "BreadcrumbPage"

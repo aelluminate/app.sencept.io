@@ -1,11 +1,10 @@
-"use client"
-
 import * as React from "react"
+
 import { Slot } from "@radix-ui/react-slot"
 
-import { cn } from "../../../utils/cn"
-import { ButtonProps } from "../../../types/button"
-import { buttonVariants } from "../../../lib/variants"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/lib/variants"
+import { ButtonProps } from "@/lib/types/button"
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
@@ -15,5 +14,4 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     )
   },
 )
-
 Button.displayName = "Button"

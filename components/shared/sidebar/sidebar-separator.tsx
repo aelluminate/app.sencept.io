@@ -1,22 +1,20 @@
-"use client"
-
 import * as React from "react"
 
-import { cn } from "../../../utils/cn"
-import { Separator } from "../separator/separator"
+import { cn } from "@/lib/utils"
+
+import { Separator } from "@/components/shared/separator/_index"
 
 export const SidebarSeparator = React.forwardRef<
-  React.ElementRef<typeof Separator>,
+  React.ComponentRef<typeof Separator>,
   React.ComponentProps<typeof Separator>
 >(({ className, ...props }, ref) => {
   return (
     <Separator
       ref={ref}
       data-sidebar="separator"
-      className={cn("bg-sidebar-border mx-2 w-auto", className)}
+      className={cn("mx-2 w-auto bg-sidebar-border", className)}
       {...props}
     />
   )
 })
-
 SidebarSeparator.displayName = "SidebarSeparator"

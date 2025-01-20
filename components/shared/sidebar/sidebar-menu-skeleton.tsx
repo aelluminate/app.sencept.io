@@ -1,9 +1,8 @@
-"use client"
-
 import * as React from "react"
 
-import { cn } from "../../../utils/cn"
-import { Skeleton } from "../skeleton/_index"
+import { cn } from "@/lib/utils"
+
+import { Skeleton } from "@/components/shared/skeleton/_index"
 
 export const SidebarMenuSkeleton = React.forwardRef<
   HTMLDivElement,
@@ -11,6 +10,7 @@ export const SidebarMenuSkeleton = React.forwardRef<
     showIcon?: boolean
   }
 >(({ className, showIcon = false, ...props }, ref) => {
+  // Random width between 50 to 90%.
   const width = React.useMemo(() => {
     return `${Math.floor(Math.random() * 40) + 50}%`
   }, [])
@@ -35,5 +35,4 @@ export const SidebarMenuSkeleton = React.forwardRef<
     </div>
   )
 })
-
 SidebarMenuSkeleton.displayName = "SidebarMenuSkeleton"

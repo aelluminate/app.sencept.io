@@ -1,9 +1,8 @@
-"use client"
-
 import * as React from "react"
+
 import { MoreHorizontal } from "lucide-react"
 
-import { cn } from "../../../utils/cn"
+import { cn } from "@/lib/utils"
 
 export const BreadcrumbEllipsis = ({ className, ...props }: React.ComponentProps<"span">) => (
   <span
@@ -16,5 +15,4 @@ export const BreadcrumbEllipsis = ({ className, ...props }: React.ComponentProps
     <span className="sr-only">More</span>
   </span>
 )
-
 BreadcrumbEllipsis.displayName = "BreadcrumbElipssis"

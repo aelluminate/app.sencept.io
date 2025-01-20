@@ -1,12 +1,11 @@
-"use client"
-
 import * as React from "react"
 
-import { cn } from "../../../utils/cn"
-import { Input } from "../input/input"
+import { cn } from "@/lib/utils"
+
+import { Input } from "@/components/shared/input/_index"
 
 export const SidebarInput = React.forwardRef<
-  React.ElementRef<typeof Input>,
+  React.ComponentRef<typeof Input>,
   React.ComponentProps<typeof Input>
 >(({ className, ...props }, ref) => {
   return (
@@ -14,12 +13,11 @@ export const SidebarInput = React.forwardRef<
       ref={ref}
       data-sidebar="input"
       className={cn(
-        "focus-visible:ring-sidebar-ring h-8 w-full bg-background shadow-none focus-visible:ring-2",
+        "h-8 w-full bg-background shadow-none focus-visible:ring-2 focus-visible:ring-sidebar-ring",
         className,
       )}
       {...props}
     />
   )
 })
-
 SidebarInput.displayName = "SidebarInput"

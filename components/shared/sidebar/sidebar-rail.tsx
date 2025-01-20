@@ -1,9 +1,8 @@
 "use client"
-
 import * as React from "react"
 
-import { useSidebar } from "../../../hooks/use-sidebar"
-import { cn } from "../../../utils/cn"
+import { cn } from "@/lib/utils"
+import { useSidebar } from "@/hooks/use-sidebar"
 
 export const SidebarRail = React.forwardRef<HTMLButtonElement, React.ComponentProps<"button">>(
   ({ className, ...props }, ref) => {
@@ -31,5 +30,4 @@ export const SidebarRail = React.forwardRef<HTMLButtonElement, React.ComponentPr
     )
   },
 )
-
 SidebarRail.displayName = "SidebarRail"
