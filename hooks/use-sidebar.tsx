@@ -1,9 +1,9 @@
 import * as React from "react"
 
-import { SidebarContext } from "../components/shared/sidebar/_index"
+import { SidebarContext as Context } from "@/lib/contexts/sidebar"
 
 export function useSidebar() {
-  const context = React.useContext(SidebarContext)
+  const context = React.useContext(Context)
   if (!context) {
     throw new Error("useSidebar must be used within a SidebarProvider.")
   }
