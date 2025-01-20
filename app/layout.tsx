@@ -6,6 +6,10 @@ import { metadata as SiteMetadata } from "@/lib/meta/metadata"
 export const metadata: Metadata = SiteMetadata
 
 import { ThemeProvider } from "@/components/shared/theme-provider"
+import { SidebarProvider } from "@/components/providers/sidebar"
+import { AppSidebar } from "@/components/ui/main-sidebar"
+import { SidebarInset } from "@/components/shared/sidebar/_index"
+import { Header } from "@/components/ui/header"
 
 export default function RootLayout({
   children,
@@ -20,7 +24,13 @@ export default function RootLayout({
     >
       <body className="font-geist antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          {children}
+          <SidebarProvider>
+            <AppSidebar />
+            <SidebarInset>
+              <Header />
+              {children}
+            </SidebarInset>
+          </SidebarProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -1,32 +1,38 @@
-import { SidebarProvider } from "@/components/providers/sidebar"
-
-import { AppSidebar } from "@/components/ui/main-sidebar"
+import * as React from "react"
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbList,
-  BreadcrumbPage,
-} from "@/components/shared/breadcrumb/_index"
-import { Separator } from "@/components/shared/separator/_index"
-import { SidebarInset, SidebarTrigger } from "@/components/shared/sidebar/_index"
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/shared/dropdown-menu/_index"
+import { ChevronsUpDown, Plus } from "lucide-react"
+import { Button } from "@/components/shared/button/button"
+import { DataTableDemo } from "@/components/shared/data-table/_index"
 
 export default function Home() {
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-          <SidebarTrigger className="-ml-1" />
-          <Separator orientation="vertical" className="mr-2 h-4" />
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbPage>Generate</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </header>
-      </SidebarInset>
-    </SidebarProvider>
+    <main className="h-full w-full p-4 text-sm">
+      <div className="flex flex-row items-center justify-between gap-2">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button className="flex items-center" variant="outline" size="sm">
+              sales-simulation
+              <ChevronsUpDown className="ml-2 h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem>sales-simulation</DropdownMenuItem>
+            <DropdownMenuItem>traffic-system</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <Button className="flex items-center gap-1" variant="outline" size="sm">
+          <Plus className="h-4 w-4" />
+          Add Project
+        </Button>
+      </div>
+      <div className="mt-4">
+        <DataTableDemo />
+      </div>
+    </main>
   )
 }
