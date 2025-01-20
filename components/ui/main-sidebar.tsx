@@ -18,17 +18,24 @@ import {
 const data = {
   navMain: [
     {
-      title: "Getting Started",
+      title: "General",
       url: "#",
       items: [
         {
-          title: "Installation",
+          title: "Schemas",
           url: "#",
           isActive: true,
         },
+      ],
+    },
+    {
+      title: "Visualizations",
+      url: "#",
+      items: [
         {
-          title: "Project Structure",
+          title: "Nodes",
           url: "#",
+          isActive: false,
         },
       ],
     },
