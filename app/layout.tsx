@@ -5,9 +5,7 @@ import { geistSans, spaceGroteskMono } from "../lib/fonts"
 import { metadata as SiteMetadata } from "@/lib/meta/metadata"
 export const metadata: Metadata = SiteMetadata
 
-/** Components */
 import { ThemeProvider } from "@/components/shared/theme-provider"
-// import { Navbar } from "@/components/ui/navbar"
 
 export default function RootLayout({
   children,
@@ -22,7 +20,6 @@ export default function RootLayout({
     >
       <body className="font-geist antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          {/* <Navbar /> */}
           {children}
         </ThemeProvider>
       </body>
