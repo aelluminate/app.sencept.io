@@ -1,12 +1,14 @@
 import * as React from "react"
+
+import { ChevronsUpDown, Plus } from "lucide-react"
+
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/shared/dropdown-menu/_index"
-import { ChevronsUpDown, Plus } from "lucide-react"
-import { Button } from "@/components/shared/button/button"
+import { Button } from "@/components/shared/button/_index"
 import { DataTableDemo } from "@/components/shared/data-table/_index"
 
 export default function Home() {
