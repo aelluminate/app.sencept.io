@@ -19,10 +19,15 @@ export const buttonVariants = cva(
         lg: "h-10 rounded-md px-8",
         icon: "h-9 w-9",
       },
+      disabled: {
+        true: "pointer-events-none opacity-50",
+        false: "",
+      },
     },
     defaultVariants: {
       variant: "default",
       size: "default",
+      disabled: false,
     },
   },
 )
