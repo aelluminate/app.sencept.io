@@ -25,6 +25,6 @@ export const sources = [
     label: "Upload a file",
     description: "Import data from a local file.",
     disabled: false,
-    fileTypes: [".csv", ".xlsx", ".json", ".xml", ".parquet"],
+    serves: [".csv", ".xlsx", ".json", ".xml", ".parquet"],
   },
 ]
