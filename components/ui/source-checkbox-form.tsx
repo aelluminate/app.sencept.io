@@ -71,11 +71,11 @@ export function SourceCheckboxForm() {
                         {source.badge}
                       </Badge>
                     )}
-                    {!source.disabled && source.name === "file" && source.fileTypes && (
+                    {!source.disabled && source.name === "file" && source.serves && (
                       <div className="mt-2 flex flex-wrap gap-2">
-                        {source.fileTypes.map((fileType) => (
-                          <Badge key={fileType} variant="outline" className="w-fit text-gray-600">
-                            {fileType}
+                        {source.serves.map((serve) => (
+                          <Badge key={serve} variant="outline" className="w-fit text-gray-600">
+                            {serve}
                           </Badge>
                         ))}
                       </div>

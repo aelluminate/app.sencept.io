@@ -1,0 +1,7 @@
+export { Pagination } from "./pagination"
+export { PaginationContent } from "./pagination-content"
+export { PaginationItem } from "./pagination-item"
+export { PaginationLink } from "./pagination-link"
+export { PaginationPrevious } from "./pagination-previous"
+export { PaginationNext } from "./pagination-next"
+export { PaginationEllipsis } from "./pagination-ellipsis"
