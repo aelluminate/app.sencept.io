@@ -13,3 +13,7 @@ Sencept enables the creation of customizable, schema-driven synthetic data that 
 ###### as of Jan 21, 2025
 
 ![012125](/docs/img/012125-upload.png)
+
+## Activities
+
+![Alt](https://repobeats.axiom.co/api/embed/b9c76ef2f1d9672adbd07e0805d5c08c298e9e8e.svg "Repobeats analytics image")
