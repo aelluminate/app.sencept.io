@@ -106,7 +106,7 @@ export function DataTable<T extends Identifiable>({ data }: DataTableProps<T>) {
         placeholder="Search..."
         value={globalFilter ?? ""}
         onChange={(event) => setGlobalFilter(event.target.value)}
-        className="max-w-sm"
+        className="max-w-xs"
       />
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-2">
@@ -161,15 +161,17 @@ export function DataTable<T extends Identifiable>({ data }: DataTableProps<T>) {
         </div>
       </div>
 
-      {/* Table wrapper with fixed layout */}
       <div className="relative rounded-md border">
         <div className="overflow-auto">
-          <Table>
+          <Table className="border-collapse">
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
-                    <TableHead key={header.id}>
+                    <TableHead
+                      key={header.id}
+                      className="border-r border-gray-200 dark:border-gray-800"
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(header.column.columnDef.header, header.getContext())}
@@ -183,7 +185,10 @@ export function DataTable<T extends Identifiable>({ data }: DataTableProps<T>) {
                 table.getRowModel().rows.map((row) => (
                   <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
                     {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
+                      <TableCell
+                        key={cell.id}
+                        className="border-r border-gray-200 dark:border-gray-800"
+                      >
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </TableCell>
                     ))}

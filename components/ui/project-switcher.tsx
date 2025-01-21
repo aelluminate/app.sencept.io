@@ -14,9 +14,9 @@ export function ProjectSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="flex items-center" variant="outline" size="sm">
+        <Button className="flex items-center" variant="outline" size="default">
           sales-simulation
-          <ChevronsUpDown className="ml-2 h-4 w-4" />
+          <ChevronsUpDown className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
