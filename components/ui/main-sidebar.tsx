@@ -14,33 +14,7 @@ import {
   SidebarRail,
 } from "@/components/shared/sidebar/_index"
 
-// This is sample data.
-const data = {
-  navMain: [
-    {
-      title: "General",
-      url: "#",
-      items: [
-        {
-          title: "Schemas",
-          url: "#",
-          isActive: true,
-        },
-      ],
-    },
-    {
-      title: "Visualizations",
-      url: "#",
-      items: [
-        {
-          title: "Nodes",
-          url: "#",
-          isActive: false,
-        },
-      ],
-    },
-  ],
-}
+import { navigation } from "@/static/navigation"
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
@@ -49,7 +23,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <Logo />
       </SidebarHeader>
       <SidebarContent>
-        {data.navMain.map((item) => (
+        {navigation.navMain.map((item) => (
           <SidebarGroup key={item.title}>
             <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
             <SidebarGroupContent>
