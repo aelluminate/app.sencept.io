@@ -1,8 +1,10 @@
 import * as React from "react"
 
-import { DataTableDemo } from "@/components/shared/data-table/_index"
 import { ProjectSwitcher } from "@/components/ui/project-switcher"
 import { AddProjectDialog } from "@/components/ui/add-project-dialog"
+import { DataTable } from "@/components/shared/data-table/data-table"
+
+import { data } from "@/static/data"
 
 export default function HomePage() {
   return (
@@ -12,7 +14,7 @@ export default function HomePage() {
         <AddProjectDialog />
       </div>
       <div className="mt-4">
-        <DataTableDemo />
+        <DataTable data={data} />
       </div>
     </main>
   )
