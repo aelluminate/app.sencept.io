@@ -26,10 +26,12 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <SidebarProvider>
             <AppSidebar />
-            <SidebarInset>
-              <Header />
-              {children}
-            </SidebarInset>
+            <div className="min-h-screen flex-1 overflow-x-hidden">
+              <SidebarInset>
+                <Header />
+                {children}
+              </SidebarInset>
+            </div>
           </SidebarProvider>
         </ThemeProvider>
       </body>

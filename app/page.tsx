@@ -13,7 +13,7 @@ export default function HomePage() {
         <ProjectSwitcher />
         <AddProjectDialog />
       </div>
-      <div className="mt-4">
+      <div className="mt-4 w-full overflow-hidden">
         <DataTable data={data} />
       </div>
     </main>
