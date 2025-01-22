@@ -68,7 +68,7 @@ export function DataTable<T extends Identifiable>({ data }: DataTableProps<T>) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
-  const [pageSize, setPageSize] = React.useState(10)
+  const [pageSize, setPageSize] = React.useState(15)
   const [pageIndex] = React.useState(0)
 
   const table = useReactTable({
@@ -141,7 +141,7 @@ export function DataTable<T extends Identifiable>({ data }: DataTableProps<T>) {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              {[10, 15, 20, 25].map((size) => (
+              {[15, 25, 50].map((size) => (
                 <DropdownMenuItem key={size} onClick={() => setPageSize(size)}>
                   {size} items
                 </DropdownMenuItem>
