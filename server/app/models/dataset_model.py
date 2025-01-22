@@ -1,17 +1,19 @@
 import uuid
 from ..db.database import db
-from datetime import datetime
+from datetime import datetime, timezone
+
+
+def generate_short_uuid():
+    return str(uuid.uuid4())[:8]
 
 
 class Dataset(db.Model):
-    id = db.Column(
-        db.String(36), primary_key=True, default=lambda: str(uuid.uuid4())
-    )  # Random alphanumeric ID
-    name = db.Column(db.String(255), nullable=False)  # Name of the dataset
-    filename = db.Column(db.String(255), nullable=False)  # Original filename
-    filepath = db.Column(db.String(255), nullable=False)  # Path to the uploaded file
-    filesize = db.Column(db.Integer, nullable=False)  # Size of the file in bytes
-    upload_date = db.Column(db.DateTime, default=datetime.utcnow)  # Timestamp of upload
+    id = db.Column(db.String(8), primary_key=True, default=generate_short_uuid)
+    name = db.Column(db.String(255), nullable=False)
+    filename = db.Column(db.String(255), nullable=False)
+    filepath = db.Column(db.String(255), nullable=False)
+    filesize = db.Column(db.Integer, nullable=False)
+    upload_date = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
     def to_dict(self):
         return {
