@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/lib/variants"
+import { buttonVariants } from "@/components/shared/variants"
 import { PaginationLinkProps } from "@/lib/types/pagination"
 
 export const PaginationLink = ({

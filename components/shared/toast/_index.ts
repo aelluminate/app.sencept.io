@@ -1,3 +1,4 @@
+export { Toaster } from "./toaster"
 export { Toast } from "./toast"
 export { ToastViewport } from "./toast-viewport"
 export { ToastAction } from "./toast-action"

@@ -1,6 +1,13 @@
 "use client"
 import * as React from "react"
+import Link from "next/link"
+
 import { Plus } from "lucide-react"
+import { useForm, FormProvider } from "react-hook-form"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useToast } from "@/hooks/use-toast"
+
 import {
   Dialog,
   DialogTrigger,
@@ -13,11 +20,9 @@ import {
 } from "@/components/shared/dialog/_index"
 import { Button } from "@/components/shared/button/_index"
 import { Input } from "@/components/shared/input/_index"
+import { ToastAction } from "@/components/shared/toast/_index"
 import { Label } from "@/components/shared/label/label"
 import { SourceCheckboxForm } from "@/components/ui/source-checkbox-form"
-import { useForm, FormProvider } from "react-hook-form"
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
 
 const FormSchema = z
   .object({
@@ -29,16 +34,16 @@ const FormSchema = z
   .refine(
     (data) => {
       if (data.source === "file" && !data.file) {
-        return false // File is required when source is "file"
+        return false
       }
       if (data.source === "url" && !data.url) {
-        return false // URL is required when source is "url"
+        return false
       }
       return true
     },
     {
       message: "File or URL is required based on the selected source",
-      path: ["file"], // Highlight the file field when validation fails
+      path: ["file"],
     },
   )
 
@@ -49,11 +54,11 @@ export function AddDatasetDialog() {
     resolver: zodResolver(FormSchema),
   })
   const [isLoading, setIsLoading] = React.useState(false)
+  const { toast } = useToast()
 
   const selectedSource = methods.watch("source")
 
   const onSubmit = async (data: FormValues) => {
-    console.log("Form data submitted:", data) // Debugging: Log form data
     setIsLoading(true)
 
     try {
@@ -66,8 +71,6 @@ export function AddDatasetDialog() {
         formData.append("url", data.url)
       }
 
-      console.log("FormData being sent:", formData) // Debugging: Log FormData
-
       const response = await fetch("/api/datasets/upload", {
         method: "POST",
         body: formData,
@@ -76,18 +79,67 @@ export function AddDatasetDialog() {
       const result = await response.json()
 
       if (response.ok) {
-        alert("Dataset uploaded successfully!")
-        console.log("Uploaded dataset:", result)
+        toast({
+          title: "Success",
+          description: "Dataset uploaded successfully!",
+        })
       } else {
-        alert(`Error: ${result.error}`)
+        toast({
+          title: "Error",
+          description: `Error: ${result.error}`,
+          variant: "default",
+          action: (
+            <ToastAction altText="Report Issue">
+              <Link href="https://github.com/aelluminate/app.sencept.io/issues" target="_blank">
+                Report
+              </Link>
+            </ToastAction>
+          ),
+        })
       }
-    } catch (error) {
-      console.error("Error uploading dataset:", error)
-      alert("An error occurred while uploading the dataset.")
+    } catch (error: unknown) {
+      let errorMessage = "An unexpected error occurred"
+      if (error instanceof Error) {
+        errorMessage = error.message
+      }
+      toast({
+        title: "Error",
+        description: `Error: ${errorMessage}`,
+        variant: "default",
+        action: (
+          <ToastAction
+            altText="Report Issue"
+            onClick={() =>
+              window.open("https://github.com/aelluminate/app.sencept.io/issues", "_blank")
+            }
+          >
+            Report
+          </ToastAction>
+        ),
+      })
     } finally {
       setIsLoading(false)
     }
   }
+
+  React.useEffect(() => {
+    if (methods.formState.errors) {
+      for (const error of Object.values(methods.formState.errors)) {
+        toast({
+          title: "Error",
+          description: error.message,
+          variant: "default",
+          action: (
+            <ToastAction altText="Report Issue">
+              <Link href="https://github.com/aelluminate/app.sencept.io/issues" target="_blank">
+                Report
+              </Link>
+            </ToastAction>
+          ),
+        })
+      }
+    }
+  }, [methods.formState.errors, toast])
 
   return (
     <Dialog>
@@ -113,11 +165,6 @@ export function AddDatasetDialog() {
                   placeholder="Enter dataset name"
                   {...methods.register("datasetName")}
                 />
-                {methods.formState.errors.datasetName && (
-                  <p className="text-sm text-red-500">
-                    {methods.formState.errors.datasetName.message}
-                  </p>
-                )}
               </div>
 
               <SourceCheckboxForm />
@@ -133,9 +180,6 @@ export function AddDatasetDialog() {
                       required: selectedSource === "file" ? "File is required" : false,
                     })}
                   />
-                  {methods.formState.errors.file && (
-                    <p className="text-sm text-red-500">{methods.formState.errors.file.message}</p>
-                  )}
                 </div>
               )}
 
@@ -151,9 +195,6 @@ export function AddDatasetDialog() {
                       required: selectedSource === "url" ? "URL is required" : false,
                     })}
                   />
-                  {methods.formState.errors.url && (
-                    <p className="text-sm text-red-500">{methods.formState.errors.url.message}</p>
-                  )}
                 </div>
               )}
 
