@@ -33,7 +33,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/shared/table/_index"
-import { generateColumns } from "@/components/utils/generate-column"
+import { generateColumns } from "@/components/utils/generate-columns"
 import {
   Pagination,
   PaginationContent,
