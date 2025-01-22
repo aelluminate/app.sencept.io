@@ -21,6 +21,13 @@ export const sources = [
     badge: "Not yet available",
   },
   {
+    name: "generate",
+    label: "Generate dataset",
+    description: "Generate a synthetic dataset based on your specifications.",
+    disabled: true,
+    badge: "Not yet available",
+  },
+  {
     name: "file",
     label: "Upload a file",
     description: "Import data from a local file.",

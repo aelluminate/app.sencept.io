@@ -3,10 +3,10 @@ import * as React from "react"
 import { Link2 } from "lucide-react"
 
 import { ProjectSwitcher } from "@/components/ui/project-switcher"
-import { AddProjectDialog } from "@/components/ui/add-project-dialog"
+import { AddDatasetDialog } from "@/components/ui/add-dataset-dialog"
 import { DataTable } from "@/components/shared/data-table/data-table"
 
-import { data } from "@/static/data"
+import { data } from "@/static/data.js"
 
 export default function HomePage() {
   return (
@@ -19,7 +19,7 @@ export default function HomePage() {
             <span>github.com/mnemonic-vault/sales-simulation</span>
           </div>
         </div>
-        <AddProjectDialog />
+        <AddDatasetDialog />
       </div>
       <div className="mt-4 w-full overflow-hidden">
         <DataTable data={data} />
