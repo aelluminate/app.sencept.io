@@ -6,7 +6,7 @@ import { type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 import { useSidebar } from "@/hooks/use-sidebar"
-import { sidebarMenuButtonVariants } from "@/lib/variants"
+import { sidebarMenuButtonVariants } from "@/components/shared/variants"
 
 import { TooltipContent, Tooltip, TooltipTrigger } from "@/components/shared/tooltip/_index"
 

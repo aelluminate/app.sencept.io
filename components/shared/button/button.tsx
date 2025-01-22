@@ -3,7 +3,7 @@ import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 
 import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/lib/variants"
+import { buttonVariants } from "@/components/shared/variants"
 import { ButtonProps } from "@/lib/types/button"
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(

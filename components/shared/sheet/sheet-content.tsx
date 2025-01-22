@@ -6,7 +6,7 @@ import * as SheetPrimitive from "@radix-ui/react-dialog"
 
 import { cn } from "@/lib/utils"
 import { SheetContentProps } from "@/lib/interfaces/sheet"
-import { sheetVariants } from "@/lib/variants"
+import { sheetVariants } from "@/components/shared/variants"
 
 import { SheetPortal, SheetOverlay } from "@/components/shared/sheet/_index"
 
