@@ -17,7 +17,7 @@ export function Header() {
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbPage>Generate</BreadcrumbPage>
+            <BreadcrumbPage>Schemas</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
