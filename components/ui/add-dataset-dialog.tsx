@@ -4,6 +4,7 @@ import * as React from "react"
 import { Plus } from "lucide-react"
 
 import { useDatasetForm } from "@/hooks/api/use-dataset-form"
+import { toSlugFormat } from "@/lib/utils/to-slug-format"
 
 import {
   Dialog,
@@ -34,14 +35,8 @@ export function AddDatasetDialog() {
     onSuccess: () => setIsDialogOpen(false),
   })
 
-  // Real-time updates
   const inputValue = methods.watch("datasetName")
-  const toSlugFormat = (name: string) => {
-    return name
-      .toLowerCase()
-      .replace(/\s/g, "-")
-      .replace(/[^a-z0-9-]/g, "")
-  }
+
   const hyphenCount = (slug: string) => (slug.match(/-/g) || []).length
 
   return (
