@@ -1,7 +1,10 @@
+import { z } from "zod"
 import {
   FieldPath,
   FieldValues,
 } from "react-hook-form"
+
+import { FormSchema } from "@/lib/schema/form-schema"
 
 export type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -13,3 +16,5 @@ export type FormFieldContextValue<
 export type FormItemContextValue = {
   id: string
 }
+
+export type FormValues = z.infer<typeof FormSchema>
