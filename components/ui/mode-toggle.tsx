@@ -4,7 +4,7 @@ import * as React from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 
-import { Switch } from "@/components/shared/switch/_index"
+import { Button } from "@/components/shared/button/button"
 
 export function ModeToggle() {
   const { theme, setTheme } = useTheme()
@@ -23,14 +23,13 @@ export function ModeToggle() {
   }
 
   return (
-    <div className="flex items-center gap-2">
-      <Switch checked={theme === "dark"} onCheckedChange={toggleTheme} className="relative" />
+    <Button onClick={toggleTheme} className="flex" size="icon" variant="ghost">
       {theme === "dark" ? (
-        <Moon className="h-5 w-5 text-blue-500" />
+        <Moon className="h-4 w-4 text-blue-500" />
       ) : (
-        <Sun className="h-5 w-5 text-yellow-500" />
+        <Sun className="h-4 w-4 text-amber-500" />
       )}
       <span className="sr-only">Toggle theme</span>
-    </div>
+    </Button>
   )
 }
