@@ -5,7 +5,6 @@ from ..utils.file_utils import allowed_file
 from ..config import Config
 from ..models.dataset_model import Dataset
 from ..db.database import db
-import json
 import logging
 
 logger = logging.getLogger(__name__)
@@ -54,25 +53,23 @@ class DatasetService:
             else:
                 return {"error": "Unsupported file type"}, 400
 
+            # Replace NaN values with null
+            df = df.where(pd.notnull(df), None)
+
             # Convert the DataFrame to JSON
             json_data = df.to_json(orient="records", indent=4)
 
             # Save the JSON data to a new file
-            json_filename = (
-                f"{os.path.splitext(filename)[0]}.json"  # Change extension to .json
-            )
+            json_filename = f"{os.path.splitext(filename)[0]}.json"
             json_filepath = os.path.join(Config.UPLOAD_FOLDER, json_filename)
             with open(json_filepath, "w") as json_file:
                 json_file.write(json_data)
 
-            # Save dataset metadata to the database
             dataset = Dataset(
                 name=dataset_name,
-                filename=json_filename,  # Save the JSON filename
-                filepath=json_filepath,  # Save the JSON filepath
-                filesize=os.path.getsize(
-                    json_filepath
-                ),  # Get the size of the JSON file
+                filename=json_filename,
+                filepath=json_filepath,
+                filesize=os.path.getsize(json_filepath),
             )
             db.session.add(dataset)
             db.session.commit()
@@ -83,8 +80,7 @@ class DatasetService:
                 "dataset_id": dataset.id,
                 "name": dataset.name,
                 "rows": len(df),
-                "columns": list(df.columns),
-                "sample": df.head(1).to_dict(orient="records"),  # First row as a sample
+                "filesize": dataset.filesize,
             }
 
             logger.info(
