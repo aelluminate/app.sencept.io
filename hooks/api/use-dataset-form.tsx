@@ -8,11 +8,12 @@ import { GITHUB_REPO_ISSUES, FLASK_API_URL } from "@/config/constants"
 import { useToast } from "@/hooks/use-toast"
 import { FormSchema } from "@/lib/schema/form-schema"
 import { FormValues } from "@/lib/types/form"
+import { toSlugFormat } from "@/lib/utils/to-slug-format"
 
 import { ToastAction } from "@/components/shared/toast/_index"
 
 interface UseDatasetFormProps {
-  onSuccess?: () => void // Callback for successful submission
+  onSuccess?: () => void
 }
 
 export function useDatasetForm({ onSuccess }: UseDatasetFormProps = {}) {
@@ -35,8 +36,9 @@ export function useDatasetForm({ onSuccess }: UseDatasetFormProps = {}) {
 
     try {
       const formData = new FormData()
-      formData.append("name", data.datasetName)
 
+      const slugName = toSlugFormat(data.datasetName)
+      formData.append("name", slugName)
       if (data.source === "file" && data.file) {
         formData.append("file", data.file)
       } else if (data.source === "url" && data.url) {
@@ -57,7 +59,7 @@ export function useDatasetForm({ onSuccess }: UseDatasetFormProps = {}) {
           variant: "success",
         })
         methods.reset()
-        onSuccess?.() // Call the onSuccess callback
+        onSuccess?.()
       } else {
         toast({
           title: "Error",
