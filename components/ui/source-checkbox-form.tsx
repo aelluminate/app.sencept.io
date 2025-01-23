@@ -16,7 +16,7 @@ import {
 import { sources } from "@/static/sources"
 
 export function SourceCheckboxForm() {
-  const { control } = useFormContext()
+  const { control, setValue } = useFormContext()
 
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -33,7 +33,14 @@ export function SourceCheckboxForm() {
                 <FormControl>
                   <Checkbox
                     checked={field.value}
-                    onCheckedChange={field.onChange}
+                    onCheckedChange={(checked) => {
+                      field.onChange(checked)
+                      if (checked) {
+                        setValue("source", source.name)
+                      } else {
+                        setValue("source", "")
+                      }
+                    }}
                     disabled={source.disabled}
                   />
                 </FormControl>
@@ -59,12 +66,25 @@ export function SourceCheckboxForm() {
                     </div>
                   )}
                   {!source.disabled && (
-                    <Input
-                      type={source.name === "file" ? "file" : "text"}
-                      placeholder={`Enter ${source.label}`}
-                      {...control.register(`${source.name}Url`)}
-                      className="mt-auto"
-                      disabled={!field.value}
+                    <FormField
+                      control={control}
+                      name={source.name === "file" ? "file" : `${source.name}Url`}
+                      render={({ field: inputField }) => (
+                        <Input
+                          type={source.name === "file" ? "file" : "text"}
+                          placeholder={`Enter ${source.label}`}
+                          onChange={(e) => {
+                            if (source.name === "file") {
+                              const file = e.target.files?.[0]
+                              setValue("file", file)
+                            } else {
+                              inputField.onChange(e.target.value)
+                            }
+                          }}
+                          className="mt-auto"
+                          disabled={!field.value}
+                        />
+                      )}
                     />
                   )}
                 </div>
