@@ -1,11 +1,8 @@
 "use client"
 import * as React from "react"
-
 import { Plus } from "lucide-react"
-
 import { useDatasetForm } from "@/hooks/api/use-dataset-form"
 import { toSlugFormat } from "@/lib/utils/to-slug-format"
-
 import {
   Dialog,
   DialogTrigger,
@@ -28,11 +25,19 @@ import { Button } from "@/components/shared/button/_index"
 import { Input, CharacterCounter } from "@/components/shared/input/_index"
 import { SourceCheckboxForm } from "@/components/ui/source-checkbox-form"
 
-export function AddDatasetDialog() {
+interface AddDatasetDialogProps {
+  children?: React.ReactNode // Add children prop
+  onSuccess?: () => void
+}
+
+export function AddDatasetDialog({ children, onSuccess }: AddDatasetDialogProps) {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false)
 
   const { methods, onSubmit, isLoading } = useDatasetForm({
-    onSuccess: () => setIsDialogOpen(false),
+    onSuccess: () => {
+      setIsDialogOpen(false)
+      onSuccess?.()
+    },
   })
 
   const inputValue = methods.watch("datasetName")
@@ -42,10 +47,12 @@ export function AddDatasetDialog() {
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogTrigger asChild>
-        <Button className="flex items-center gap-1" variant="outline" size="sm">
-          <Plus className="h-4 w-4" />
-          Create new Dataset
-        </Button>
+        {children || (
+          <div className="flex items-center gap-1">
+            <Plus className="h-4 w-4" />
+            Create new Dataset
+          </div>
+        )}
       </DialogTrigger>
       <DialogPortal>
         <DialogOverlay />
@@ -94,8 +101,6 @@ export function AddDatasetDialog() {
                   </FormItem>
                 )}
               />
-
-              {/* Display the rewritten dataset name in real-time */}
 
               <SourceCheckboxForm />
 
