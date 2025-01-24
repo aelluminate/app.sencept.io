@@ -26,7 +26,7 @@ import { Input, CharacterCounter } from "@/components/shared/input/_index"
 import { SourceCheckboxForm } from "@/components/ui/source-checkbox-form"
 
 interface AddDatasetDialogProps {
-  children?: React.ReactNode // Add children prop
+  children?: React.ReactNode
   onSuccess?: () => void
 }
 

@@ -23,7 +23,7 @@ export function ModeToggle() {
   }
 
   return (
-    <Button onClick={toggleTheme} className="flex" size="icon" variant="ghost">
+    <Button onClick={toggleTheme} className="flex" size="icon" variant="link">
       {theme === "dark" ? (
         <Moon className="h-4 w-4 text-blue-500" />
       ) : (

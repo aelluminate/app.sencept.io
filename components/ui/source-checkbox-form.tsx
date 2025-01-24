@@ -27,7 +27,7 @@ export function SourceCheckboxForm() {
           name={source.name}
           render={({ field }) => (
             <FormItem
-              className={`flex h-full flex-col space-y-2 rounded-md border p-2 shadow ${field.value ? "border-black dark:border-gray-400" : "border-gray-300 dark:border-gray-800"} ${source.disabled ? "opacity-50" : ""}`}
+              className={`flex h-full flex-col space-y-2 border p-2 shadow ${field.value ? "border-black dark:border-gray-400" : "border-gray-300 dark:border-gray-800"} ${source.disabled ? "opacity-50" : ""}`}
             >
               <div className="flex h-full items-start space-x-3">
                 <FormControl>
