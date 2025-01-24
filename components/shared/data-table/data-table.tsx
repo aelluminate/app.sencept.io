@@ -10,11 +10,11 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-  FilterFn,
-  Row,
 } from "@tanstack/react-table"
 import { ChevronDown, Sparkles, Pencil } from "lucide-react"
-import { rankItem } from "@tanstack/match-sorter-utils"
+
+import { Identifiable, DataTableProps } from "@/lib/types/data-table"
+import { fuzzyFilter } from "@/lib/utils/fuzzy-filter"
 
 import { Button } from "@/components/shared/button/_index"
 import { Input } from "@/components/shared/input/_index"
@@ -42,23 +42,6 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/shared/pagination/_index"
-
-interface Identifiable {
-  id: string
-}
-
-type DataTableProps<T extends Identifiable> = {
-  data: T[]
-}
-
-const fuzzyFilter: FilterFn<Identifiable> = (
-  row: Row<Identifiable>,
-  columnId: string,
-  value: string,
-) => {
-  const itemRank = rankItem(row.getValue(columnId), value)
-  return itemRank.passed
-}
 
 export function DataTable<T extends Identifiable>({ data }: DataTableProps<T>) {
   const columns = React.useMemo(() => generateColumns(data), [data])
@@ -161,17 +144,14 @@ export function DataTable<T extends Identifiable>({ data }: DataTableProps<T>) {
         </div>
       </div>
 
-      <div className="relative rounded-md border">
+      <div className="relative border">
         <div className="overflow-auto">
           <Table className="border-collapse">
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
-                    <TableHead
-                      key={header.id}
-                      className="border-r border-gray-200 dark:border-gray-800"
-                    >
+                    <TableHead key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(header.column.columnDef.header, header.getContext())}
