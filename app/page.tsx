@@ -30,10 +30,10 @@ export default function HomePage() {
               <Boxes className="h-5 w-5" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{datasets.length}</div>
+              <div className="text-2xl font-bold">{datasets?.length || 0}</div>
               <div className="mt-4 flex flex-row items-center gap-2">
                 <Badge color="green">Latest</Badge>
-                <a className="text-xs text-blue-500">/{datasets[0]?.name || "No datasets"}</a>
+                <a className="text-xs text-blue-500">/{datasets?.[0]?.name || "No datasets"}</a>
               </div>
             </CardContent>
           </Card>
@@ -55,23 +55,19 @@ export default function HomePage() {
         </div>
       </div>
       <div className="pt-4">
-        {isLoading ? (
-          <div>Loading datasets...</div>
-        ) : error ? (
-          <div>Error: {error}</div>
-        ) : (
-          <DataTable
-            data={datasets}
-            options
-            arrangement={[
-              { key: "id", displayName: "ID" },
-              { key: "name", displayName: "Dataset Name" },
-              { key: "filesize", displayName: "File Size", type: "file_size" },
-              { key: "category", displayName: "Category", type: "categories" },
-              { key: "upload_date", displayName: "Date Uploaded", type: "date" },
-            ]}
-          />
-        )}
+        <DataTable
+          data={datasets || []}
+          options
+          arrangement={[
+            { key: "id", displayName: "ID" },
+            { key: "name", displayName: "Dataset Name" },
+            { key: "filesize", displayName: "File Size", type: "file_size" },
+            { key: "category", displayName: "Category", type: "categories" },
+            { key: "upload_date", displayName: "Date Uploaded", type: "date" },
+          ]}
+          isLoading={isLoading}
+          error={error}
+        />
       </div>
     </div>
   )

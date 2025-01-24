@@ -49,13 +49,7 @@ export default function DatasetPage({ params }: { params: Promise<{ id: string }
           isDataLoading ? "flex items-center justify-center" : ""
         }`}
       >
-        {isDataLoading ? (
-          <div>Loading dataset data...</div>
-        ) : dataError ? (
-          <div>Error: {dataError}</div>
-        ) : (
-          <DataTable data={datasetData} />
-        )}
+        <DataTable data={datasetData || []} isLoading={isDataLoading} error={dataError} />
       </div>
     </div>
   )
