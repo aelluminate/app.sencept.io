@@ -1,7 +1,8 @@
 import { ColumnDef } from "@tanstack/react-table"
+
 import { Identifiable } from "@/lib/types/data-table"
 import { Checkbox } from "@/components/shared/checkbox/_index"
-import { getTypeBadge } from "@/components/utils/get-type-badge"
+import { getTypeIcon } from "@/components/utils/get-type-icon"
 
 export function generateColumns<T extends Identifiable>(data: T[]): ColumnDef<Identifiable>[] {
   if (data.length === 0) return []
@@ -9,10 +10,10 @@ export function generateColumns<T extends Identifiable>(data: T[]): ColumnDef<Id
   const keys = Object.keys(data[0]) as (keyof T)[]
 
   const columns: ColumnDef<Identifiable>[] = keys.map((key) => ({
-    accessorKey: key as string, // Ensure `accessorKey` is defined
+    accessorKey: key as string,
     header: () => (
       <div className="flex items-center gap-2">
-        {getTypeBadge(data[0][key] as string | number)}
+        {getTypeIcon(data[0][key] as string | number)}
         <span className="text-gray-800 dark:text-gray-200">{key.toString()}</span>
       </div>
     ),
