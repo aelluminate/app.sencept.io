@@ -5,14 +5,12 @@ Sencept enables the creation of customizable, schema-driven synthetic data that 
 ## Current Progress
 
 **Home Page**
-###### as of Jan 22, 2025
 
-![home](/docs/img/012325-home.png)
+![home](/docs/img/home.png)
 
 **Uploading Dialog**
-###### as of Jan 22, 2025
 
-![upload](/docs/img/012325-upload.png)
+![upload](/docs/img/upload.png)
 
 ## Activities
 
