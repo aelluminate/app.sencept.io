@@ -3,7 +3,7 @@ import pandas as pd
 from werkzeug.utils import secure_filename
 from ..utils.file_utils import allowed_file
 from ..config import Config
-from ..models.dataset_model import Dataset
+from ..models.dataset_model import Dataset, CategoryEnum
 from ..db.database import db
 import logging
 
@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 class DatasetService:
     @staticmethod
-    def upload_dataset(file, dataset_name):
+    def upload_dataset(file, dataset_name, category=CategoryEnum.UPLOADED.value):
         """Upload and process a dataset file."""
         if file.filename == "":
             return {"error": "No selected file"}, 400
@@ -70,6 +70,7 @@ class DatasetService:
                 filename=json_filename,
                 filepath=json_filepath,
                 filesize=os.path.getsize(json_filepath),
+                category=CategoryEnum[category.upper()],
             )
             db.session.add(dataset)
             db.session.commit()
@@ -81,6 +82,7 @@ class DatasetService:
                 "name": dataset.name,
                 "rows": len(df),
                 "filesize": dataset.filesize,
+                "category": dataset.category.value,
             }
 
             logger.info(

@@ -1,47 +1,76 @@
 "use client"
-import * as React from "react"
-import { Link2 } from "lucide-react"
+import { Blocks, Boxes } from "lucide-react"
 
-import { DatasetSwitcher } from "@/components/ui/dataset-switcher"
-import { DataTable } from "@/components/shared/data-table/data-table"
-import { useGetDatasetData } from "@/hooks/api/use-get-dataset-data"
+import { useGetDatasets } from "@/hooks/api/use-get-datasets"
+import { DataTable } from "@/components/ui/data-table"
+
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/shared/card/_index"
+import { Badge } from "@/components/shared/badge/_index"
 
 export default function HomePage() {
-  const [selectedDataset, setSelectedDataset] = React.useState<number | null>(null)
+  const { data: datasets, isLoading, error } = useGetDatasets()
 
-  const {
-    data: datasetData,
-    isLoading: isDataLoading,
-    error: dataError,
-  } = useGetDatasetData(selectedDataset)
+  const generatedDatasets = datasets?.filter((dataset) => dataset.category === "Generated") || []
 
   return (
-    <div className="h-full w-full p-4 text-sm">
-      <div className="flex flex-row items-center justify-between gap-2">
-        <div className="flex items-center gap-2">
-          <DatasetSwitcher onDatasetSelect={setSelectedDataset} />
-          <div className="flex items-center gap-2 text-xs text-gray-800 dark:text-gray-200">
-            <Link2 className="h-4 w-4" />
-            <span>github.com/mnemonic-vault/sales-simulation</span>
-          </div>
+    <div className="flex h-full w-full flex-col gap-4 p-4 text-sm">
+      <div className="grid w-full grid-cols-2 items-start justify-between gap-4">
+        <div className="flex flex-col items-start gap-2">
+          <div className="text-3xl font-bold">Welcome.</div>
+          <p className="max-w-xl">
+            We enables the creation of customizable, schema-driven synthetic data that accurately
+            simulates real-world scenarios, making it an invaluable asset for testing, development,
+            and research in machine learning.
+          </p>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Total Datasets</CardTitle>
+              <Boxes className="h-5 w-5" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{datasets.length}</div>
+              <div className="mt-4 flex flex-row items-center gap-2">
+                <Badge color="green">Latest</Badge>
+                <a className="text-xs text-blue-500">/{datasets[0]?.name || "No datasets"}</a>
+              </div>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Generated Datasets</CardTitle>
+              <Blocks className="h-5 w-5" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{generatedDatasets.length}</div>
+              <div className="mt-4 flex flex-row items-center gap-2">
+                <Badge color="green">Latest</Badge>
+                <a className="text-xs text-blue-500">
+                  {generatedDatasets[0]?.name || "No generated datasets"}
+                </a>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
-
-      <div
-        className={`mt-4 w-full overflow-hidden ${
-          isDataLoading || !selectedDataset ? "flex items-center justify-center" : ""
-        }`}
-      >
-        {selectedDataset ? (
-          isDataLoading ? (
-            <div>Loading dataset data...</div>
-          ) : dataError ? (
-            <div>Error: {dataError}</div>
-          ) : (
-            <DataTable data={datasetData} />
-          )
+      <div className="pt-4">
+        {isLoading ? (
+          <div>Loading datasets...</div>
+        ) : error ? (
+          <div>Error: {error}</div>
         ) : (
-          <div>No dataset selected</div>
+          <DataTable
+            data={datasets}
+            options
+            arrangement={[
+              { key: "id", displayName: "ID" },
+              { key: "name", displayName: "Dataset Name" },
+              { key: "filesize", displayName: "File Size", type: "file_size" },
+              { key: "category", displayName: "Category", type: "categories" },
+              { key: "upload_date", displayName: "Date Uploaded", type: "date" },
+            ]}
+          />
         )}
       </div>
     </div>

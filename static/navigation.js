@@ -5,8 +5,8 @@ export const navigation = {
       url: "#",
       items: [
         {
-          title: "Schemas",
-          url: "#",
+          title: "Datasets",
+          url: "/",
           isActive: true,
         },
         {
