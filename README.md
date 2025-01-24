@@ -8,7 +8,11 @@ Sencept enables the creation of customizable, schema-driven synthetic data that 
 
 ![home](/docs/img/home.png)
 
-**Uploading Dialog**
+**Dataset Table**
+
+![table](/docs/img/dataset.png)
+
+**Upload**
 
 ![upload](/docs/img/upload.png)
 
