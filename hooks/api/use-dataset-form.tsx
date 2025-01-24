@@ -9,12 +9,9 @@ import { useToast } from "@/hooks/use-toast"
 import { FormSchema } from "@/lib/schema/form-schema"
 import { FormValues } from "@/lib/types/form"
 import { toSlugFormat } from "@/lib/utils/to-slug-format"
+import { UseDatasetFormProps } from "@/lib/types/api"
 
 import { ToastAction } from "@/components/shared/toast/_index"
-
-interface UseDatasetFormProps {
-  onSuccess?: () => void
-}
 
 export function useDatasetForm({ onSuccess }: UseDatasetFormProps = {}) {
   const methods = useForm<FormValues>({

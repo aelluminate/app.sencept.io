@@ -12,7 +12,7 @@ export function Logo() {
         <div className="flex w-full">
           <div className="flex w-full flex-row items-center justify-between gap-1">
             <div className="flex w-full flex-row items-center gap-2">
-              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+              <div className="flex aspect-square size-8 items-center justify-center bg-sidebar-primary text-sidebar-primary-foreground">
                 <Pyramid className="size-4" />
               </div>
               <div className="flex flex-col items-start">

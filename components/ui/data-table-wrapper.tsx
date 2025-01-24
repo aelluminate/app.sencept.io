@@ -4,7 +4,7 @@ interface TableWrapperProps {
 
 export function DataTableWrapper({ children }: TableWrapperProps) {
   return (
-    <div className="relative rounded-md border">
+    <div className="relative border">
       <div className="overflow-auto">{children}</div>
     </div>
   )

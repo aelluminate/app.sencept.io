@@ -1,29 +1,49 @@
+"use client"
 import * as React from "react"
-
 import { Link2 } from "lucide-react"
 
-import { ProjectSwitcher } from "@/components/ui/project-switcher"
-import { AddDatasetDialog } from "@/components/ui/add-dataset-dialog"
+import { DatasetSwitcher } from "@/components/ui/dataset-switcher"
 import { DataTable } from "@/components/shared/data-table/data-table"
-
-import { data } from "@/static/data.js"
+import { useGetDatasetData } from "@/hooks/api/use-get-dataset-data"
 
 export default function HomePage() {
+  const [selectedDataset, setSelectedDataset] = React.useState<number | null>(null)
+
+  const {
+    data: datasetData,
+    isLoading: isDataLoading,
+    error: dataError,
+  } = useGetDatasetData(selectedDataset)
+
   return (
-    <main className="h-full w-full p-4 text-sm">
+    <div className="h-full w-full p-4 text-sm">
       <div className="flex flex-row items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <ProjectSwitcher />
+          <DatasetSwitcher onDatasetSelect={setSelectedDataset} />
           <div className="flex items-center gap-2 text-xs text-gray-800 dark:text-gray-200">
             <Link2 className="h-4 w-4" />
             <span>github.com/mnemonic-vault/sales-simulation</span>
           </div>
         </div>
-        <AddDatasetDialog />
       </div>
-      <div className="mt-4 w-full overflow-hidden">
-        <DataTable data={data} />
+
+      <div
+        className={`mt-4 w-full overflow-hidden ${
+          isDataLoading || !selectedDataset ? "flex items-center justify-center" : ""
+        }`}
+      >
+        {selectedDataset ? (
+          isDataLoading ? (
+            <div>Loading dataset data...</div>
+          ) : dataError ? (
+            <div>Error: {dataError}</div>
+          ) : (
+            <DataTable data={datasetData} />
+          )
+        ) : (
+          <div>No dataset selected</div>
+        )}
       </div>
-    </main>
+    </div>
   )
 }
