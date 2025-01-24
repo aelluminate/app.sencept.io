@@ -46,10 +46,12 @@ import {
 export function DataTable<T extends Identifiable>({
   data,
   options,
-  arrangement, // Add this prop
+  arrangement,
+  isLoading,
+  error,
 }: DataTableProps<T>) {
   const columns = React.useMemo(
-    () => generateColumns(data, options, arrangement), // Pass arrangement here
+    () => generateColumns(data, options, arrangement),
     [data, options, arrangement],
   )
 
@@ -168,7 +170,19 @@ export function DataTable<T extends Identifiable>({
               ))}
             </TableHeader>
             <TableBody>
-              {table.getRowModel().rows?.length ? (
+              {isLoading ? (
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                    Fetching datasets...
+                  </TableCell>
+                </TableRow>
+              ) : error ? (
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                    Error: {error}
+                  </TableCell>
+                </TableRow>
+              ) : table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map((row) => (
                   <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
                     {row.getVisibleCells().map((cell) => (
