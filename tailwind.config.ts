@@ -81,7 +81,9 @@ export default {
   		'space-grotesk': [
   			'var(--font-space-grotesk-mono)',
                 ...defaultTheme.fontFamily.mono
-            ]
+            ],
+		berkeley: ['BerkeleyMono', 'Arial', 'Helvetica', 'sans-serif'],
+
   	}
   },
   plugins: [tailwindcssAnimate],

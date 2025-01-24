@@ -23,7 +23,7 @@ export default function RootLayout({
       className={[geistSans.variable, spaceGroteskMono.variable].join(" ")}
       suppressHydrationWarning
     >
-      <body className="font-geist antialiased">
+      <body className="font-berkeley antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <SidebarProvider>
             <AppSidebar />
