@@ -7,7 +7,7 @@ interface DatasetData {
   [key: string]: string | number | boolean
 }
 
-export function useGetDatasetData(datasetId: number | null) {
+export function useGetDatasetData(datasetId: string | null) {
   const [data, setData] = React.useState<DatasetData[]>([])
   const [isLoading, setIsLoading] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)

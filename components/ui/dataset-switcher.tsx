@@ -1,6 +1,7 @@
 "use client"
 import * as React from "react"
 import { ChevronsUpDown, Plus } from "lucide-react"
+import { useRouter, usePathname } from "next/navigation"
 
 import { useDatasets } from "@/hooks/api/use-get-dataset"
 import { useToast } from "@/hooks/use-toast"
@@ -15,22 +16,24 @@ import { Button } from "@/components/shared/button/_index"
 import { Separator } from "@/components/shared/separator/_index"
 import { AddDatasetDialog } from "@/components/ui/add-dataset-dialog"
 
-export function DatasetSwitcher({
-  onDatasetSelect,
-}: {
-  onDatasetSelect: (datasetId: number | null) => void
-}) {
+export function DatasetSwitcher() {
+  const router = useRouter()
+  const pathname = usePathname()
   const { datasets, isLoading: isDatasetsLoading, error: datasetsError } = useDatasets()
   const { toast } = useToast()
 
-  const selectedDataset = React.useMemo(() => {
-    return datasets.length > 0 ? datasets[0] : { id: null, name: null }
-  }, [datasets])
+  // Extract the datasetId from the URL
+  const datasetId = pathname.split("/").pop() || null
 
-  React.useEffect(() => {
-    onDatasetSelect(selectedDataset.id)
-  }, [selectedDataset.id, onDatasetSelect])
+  // Find the selected dataset based on the datasetId
+  const selectedDataset = datasets.find((dataset) => dataset.id === datasetId)
 
+  // Handle dataset selection
+  const handleDatasetSelect = (datasetId: string) => {
+    router.push(`/dataset/${datasetId}`)
+  }
+
+  // Show toast notification if there's an error
   React.useEffect(() => {
     if (datasetsError) {
       toast({
@@ -48,13 +51,15 @@ export function DatasetSwitcher({
           <Button className="flex items-center" variant="outline" size="default">
             {isDatasetsLoading
               ? "Loading datasets..."
-              : selectedDataset.name || "No datasets available"}
+              : selectedDataset
+                ? selectedDataset.name
+                : "Select a dataset"}
             <ChevronsUpDown className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           {datasets.map((dataset) => (
-            <DropdownMenuItem key={dataset.id} onSelect={() => onDatasetSelect(dataset.id)}>
+            <DropdownMenuItem key={dataset.id} onSelect={() => handleDatasetSelect(dataset.id)}>
               {dataset.name}
             </DropdownMenuItem>
           ))}

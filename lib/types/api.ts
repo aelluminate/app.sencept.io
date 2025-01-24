@@ -3,6 +3,6 @@ export interface UseDatasetFormProps {
 }
 
 export interface UseGetDataset {
-    id: number
+    id: string
     name: string
 }
