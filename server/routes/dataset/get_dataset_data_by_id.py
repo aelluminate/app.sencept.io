@@ -1,14 +1,16 @@
-from flask import jsonify, request
-from ...models.dataset_model import Dataset
-from . import dataset_bp
 import json
 import logging
+from flask import jsonify, request
+
+from . import dataset_bp
+from models.dataset_model import Dataset
+
 
 logger = logging.getLogger(__name__)
 
 
 @dataset_bp.route("/datasets/<dataset_id>/data", methods=["GET"])
-def get_dataset_data(dataset_id):
+def get_dataset_data_by_id(dataset_id):
     try:
         # Get pagination parameters from the request
         page = request.args.get("page", default=1, type=int)

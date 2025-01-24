@@ -1,10 +1,11 @@
 from flask import request, jsonify
-from ...services.dataset_service import DatasetService
+
 from . import dataset_bp
+from services.dataset.dataset_service import DatasetService
 
 
 @dataset_bp.route("/datasets/upload", methods=["POST"])
-def post_upload():
+def post_dataset_upload():
     try:
         # Check if the file is present in the request
         if "file" not in request.files:
