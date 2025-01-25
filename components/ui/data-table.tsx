@@ -15,6 +15,7 @@ import { ChevronDown, Sparkles, Pencil } from "lucide-react"
 
 import { Identifiable, DataTableProps } from "@/lib/types/data-table"
 import { fuzzyFilter } from "@/lib/utils/fuzzy-filter"
+import { useDialog } from "@/hooks/use-dialog"
 
 import { Button } from "@/components/shared/button/_index"
 import { Input } from "@/components/shared/input/_index"
@@ -50,9 +51,10 @@ export function DataTable<T extends Identifiable>({
   isLoading,
   error,
 }: DataTableProps<T>) {
+  const { isOpen, openDialog, closeDialog } = useDialog()
   const columns = React.useMemo(
-    () => generateColumns(data, options, arrangement),
-    [data, options, arrangement],
+    () => generateColumns(data, options, arrangement, { isOpen, openDialog, closeDialog }),
+    [data, options, arrangement, isOpen, openDialog, closeDialog],
   )
 
   const [sorting, setSorting] = React.useState<SortingState>([])
@@ -148,7 +150,7 @@ export function DataTable<T extends Identifiable>({
           </Button>
           <Button className="flex items-center gap-1" variant="outline" size="sm">
             <Pencil className="h-4 w-4" />
-            Edit
+            Edit Schema
           </Button>
         </div>
       </div>

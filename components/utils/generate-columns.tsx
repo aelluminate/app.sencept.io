@@ -1,12 +1,13 @@
+import * as React from "react"
 import Link from "next/link"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { Ellipsis, Eye, Pencil, Sparkles, Trash2 } from "lucide-react"
-import { format, parseISO } from "date-fns"
-import { ReactNode } from "react" // Import ReactNode
+import { Ellipsis, Eye, Sparkles, Trash2, Pencil } from "lucide-react"
 
 import { Identifiable } from "@/lib/types/data-table"
-import { getTypeIcon } from "@/components/utils/get-type-icon"
+import { formatFileSize } from "@/lib/utils/format-file-size"
+import { formatDate } from "@/lib/utils/format-date"
+import { Dataset } from "@/lib/types/dialog"
 
 import {
   DropdownMenu,
@@ -17,11 +18,18 @@ import {
 import { Button } from "@/components/shared/button/_index"
 import { Checkbox } from "@/components/shared/checkbox/_index"
 import { Badge } from "@/components/shared/badge/_index"
+import { getTypeIcon } from "@/components/utils/get-type-icon"
+import { UpdateDatasetDialog } from "@/components/ui/update-dataset-dialog"
 
 export function generateColumns<T extends Identifiable>(
   data: T[],
   options?: boolean,
   arrangement?: Array<{ key: string; displayName: string; type?: string }>,
+  dialogControls?: {
+    isOpen: boolean
+    openDialog: () => void
+    closeDialog: () => void
+  },
 ): ColumnDef<Identifiable>[] {
   if (data.length === 0) return []
 
@@ -51,7 +59,7 @@ export function generateColumns<T extends Identifiable>(
       cell: ({ row }) => {
         const value = row.getValue(key as string)
 
-        let formattedValue: ReactNode
+        let formattedValue: React.ReactNode
 
         switch (type) {
           case "file_size":
@@ -99,53 +107,71 @@ export function generateColumns<T extends Identifiable>(
     enableHiding: false,
   })
 
-  if (options) {
+  if (options && dialogControls) {
+    const { isOpen, openDialog, closeDialog } = dialogControls
+
     columns.push({
       id: "actions",
       cell: ({ row }) => {
         const rowId = row.original.id
 
-        return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-4 w-4">
-                <Ellipsis className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem
-                onClick={() => console.log("Regenerate", row.original)}
-                className="flex flex-row items-center gap-2"
-              >
-                <Sparkles className="h-4 w-4" />
-                Regenerate
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => console.log("Edit", row.original)}
-                className="flex flex-row items-center gap-2"
-              >
-                <Pencil className="h-4 w-4" />
-                Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link
-                  href={`/dataset/${rowId}/`}
-                  className="flex w-full flex-row items-center gap-2"
-                >
-                  <Eye className="h-4 w-4" />
-                  View
-                </Link>
-              </DropdownMenuItem>
+        // Use type assertion to tell TypeScript that row.original is a Dataset
+        const dataset = row.original as Dataset
 
-              <DropdownMenuItem
-                onClick={() => console.log("Delete", row.original)}
-                className="flex flex-row items-center gap-2"
-              >
-                <Trash2 className="h-4 w-4" />
-                Delete
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+        // Define the onUpdate callback
+        const handleUpdate = (updatedDataset: Dataset) => {
+          console.log("Updated dataset:", updatedDataset)
+          // You can add logic here to update the dataset in your state or API
+        }
+
+        return (
+          <>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-4 w-4">
+                  <Ellipsis className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem
+                  onClick={() => console.log("Regenerate", dataset)}
+                  className="flex flex-row items-center gap-2"
+                >
+                  <Sparkles className="h-4 w-4" />
+                  Regenerate
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={openDialog} className="flex flex-row items-center gap-2">
+                  <Pencil className="h-4 w-4" />
+                  Edit
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link
+                    href={`/dataset/${rowId}/`}
+                    className="flex w-full flex-row items-center gap-2"
+                  >
+                    <Eye className="h-4 w-4" />
+                    View
+                  </Link>
+                </DropdownMenuItem>
+
+                <DropdownMenuItem
+                  onClick={() => console.log("Delete", dataset)}
+                  className="flex flex-row items-center gap-2"
+                >
+                  <Trash2 className="h-4 w-4" />
+                  Delete
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {/* Render the dialog */}
+            <UpdateDatasetDialog
+              dataset={dataset}
+              onUpdate={handleUpdate}
+              isOpen={isOpen}
+              onClose={closeDialog}
+            />
+          </>
         )
       },
       enableSorting: false,
@@ -154,16 +180,4 @@ export function generateColumns<T extends Identifiable>(
   }
 
   return columns
-}
-
-function formatFileSize(bytes: number): string {
-  if (bytes === 0) return "0 Bytes"
-  const k = 1024
-  const sizes = ["Bytes", "KB", "MB", "GB", "TB"]
-  const i = Math.floor(Math.log(bytes) / Math.log(k))
-  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))} ${sizes[i]}`
-}
-
-function formatDate(dateString: string): string {
-  return format(parseISO(dateString), "MMM dd, yyyy HH:mm:ss")
 }
