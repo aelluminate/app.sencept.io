@@ -12,7 +12,7 @@ import { toSlugFormat } from "@/lib/utils/to-slug-format"
 
 import { ToastAction } from "@/components/shared/toast/_index"
 
-export function usePostDatasetUploadForm({ onSuccess }: { onSuccess?: () => void } = {}) {
+export function useCreateDataset({ onSuccess }: { onSuccess?: () => void } = {}) {
   const methods = useForm<FormValues>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -41,7 +41,7 @@ export function usePostDatasetUploadForm({ onSuccess }: { onSuccess?: () => void
         formData.append("url", data.url)
       }
 
-      const response = await fetch(`${FLASK_API_URL}/datasets/upload`, {
+      const response = await fetch(`${FLASK_API_URL}/datasets`, {
         method: "POST",
         body: formData,
       })

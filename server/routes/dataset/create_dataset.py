@@ -4,8 +4,8 @@ from . import dataset_bp
 from services.dataset.dataset_service import DatasetService
 
 
-@dataset_bp.route("/datasets/upload", methods=["POST"])
-def post_dataset_upload():
+@dataset_bp.route("/datasets", methods=["POST"])
+def create_dataset():
     try:
         # Check if the file is present in the request
         if "file" not in request.files:

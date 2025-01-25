@@ -2,9 +2,10 @@ import os
 
 
 class Config:
-    # Folder to store uploaded datasets
+    ROOT_DIR = os.path.abspath(os.path.join(os.getcwd(), os.pardir))
 
-    UPLOAD_FOLDER = os.path.join(os.getcwd(), "uploads")
+    # Folder to store uploaded datasets
+    UPLOAD_FOLDER = os.path.join(ROOT_DIR, "uploads")
 
     # Supported file types
     ALLOWED_EXTENSIONS = {

@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 import { ColumnDef } from "@tanstack/react-table"
-import { Ellipsis, Eye, Sparkles, Trash2 } from "lucide-react"
+import { Ellipsis, Eye, Pencil, Sparkles, Trash2 } from "lucide-react"
 import { format, parseISO } from "date-fns"
 import { ReactNode } from "react" // Import ReactNode
 
@@ -113,6 +113,20 @@ export function generateColumns<T extends Identifiable>(
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
+              <DropdownMenuItem
+                onClick={() => console.log("Regenerate", row.original)}
+                className="flex flex-row items-center gap-2"
+              >
+                <Sparkles className="h-4 w-4" />
+                Regenerate
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => console.log("Edit", row.original)}
+                className="flex flex-row items-center gap-2"
+              >
+                <Pencil className="h-4 w-4" />
+                Edit
+              </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link
                   href={`/dataset/${rowId}/`}
@@ -122,13 +136,7 @@ export function generateColumns<T extends Identifiable>(
                   View
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={() => console.log("Regenerate", row.original)}
-                className="flex flex-row items-center gap-2"
-              >
-                <Sparkles className="h-4 w-4" />
-                Regenerate
-              </DropdownMenuItem>
+
               <DropdownMenuItem
                 onClick={() => console.log("Delete", row.original)}
                 className="flex flex-row items-center gap-2"
