@@ -9,7 +9,7 @@ from models.dataset_model import Dataset
 logger = logging.getLogger(__name__)
 
 
-@dataset_bp.route("/datasets/<dataset_id>/data", methods=["GET"])
+@dataset_bp.route("/datasets/<dataset_id>", methods=["GET"])
 def get_dataset_data_by_id(dataset_id):
     try:
         # Get pagination parameters from the request

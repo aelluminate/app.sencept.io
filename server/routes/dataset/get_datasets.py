@@ -26,6 +26,9 @@ def get_datasets():
         datasets = Dataset.query.offset(offset).limit(limit).all()
         total_datasets = Dataset.query.count()
 
+        # Log datasets for debugging
+        logger.debug(f"Datasets fetched: {datasets}")
+
         # Convert datasets to a list of dictionaries
         datasets_list = [dataset.to_dict() for dataset in datasets]
 
