@@ -1,7 +1,7 @@
 "use client"
 import * as React from "react"
 import { Plus } from "lucide-react"
-import { usePostDatasetUploadForm } from "@/hooks/api/use-post-dataset-upload-form"
+import { useCreateDataset } from "@/hooks/api/use-create-dataset"
 import { toSlugFormat } from "@/lib/utils/to-slug-format"
 import {
   Dialog,
@@ -33,7 +33,7 @@ interface AddDatasetDialogProps {
 export function CreateNewDatasetDialog({ children, onSuccess }: AddDatasetDialogProps) {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false)
 
-  const { methods, onSubmit, isLoading } = usePostDatasetUploadForm({
+  const { methods, onSubmit, isLoading } = useCreateDataset({
     onSuccess: () => {
       setIsDialogOpen(false)
       onSuccess?.()

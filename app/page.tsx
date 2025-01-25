@@ -63,7 +63,8 @@ export default function HomePage() {
             { key: "name", displayName: "Dataset Name" },
             { key: "filesize", displayName: "File Size", type: "file_size" },
             { key: "category", displayName: "Category", type: "categories" },
-            { key: "upload_date", displayName: "Date Uploaded", type: "date" },
+            { key: "created_at", displayName: "Created At", type: "date" },
+            { key: "updated_at", displayName: "Updated At", type: "date" },
           ]}
           isLoading={isLoading}
           error={error}

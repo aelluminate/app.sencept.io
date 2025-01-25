@@ -17,7 +17,7 @@ export function useGetDatasetData(datasetId: string | null) {
       setError(null)
 
       try {
-        const response = await fetch(`${FLASK_API_URL}/datasets/${datasetId}/data`, {
+        const response = await fetch(`${FLASK_API_URL}/datasets/${datasetId}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
