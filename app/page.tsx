@@ -32,8 +32,8 @@ export default function HomePage() {
             <CardContent>
               <div className="text-2xl font-bold">{datasets?.length || 0}</div>
               <div className="mt-4 flex flex-row items-center gap-2">
-                <Badge color="green">Latest</Badge>
-                <a className="text-xs text-blue-500">/{datasets?.[0]?.name || "No datasets"}</a>
+                <Badge variant="outline">Latest</Badge>
+                <a className="text-xs text-blue-500">{datasets?.[0]?.name || "No datasets"}</a>
               </div>
             </CardContent>
           </Card>
@@ -45,7 +45,7 @@ export default function HomePage() {
             <CardContent>
               <div className="text-2xl font-bold">{generatedDatasets.length}</div>
               <div className="mt-4 flex flex-row items-center gap-2">
-                <Badge color="green">Latest</Badge>
+                <Badge variant="outline">Latest</Badge>
                 <a className="text-xs text-blue-500">
                   {generatedDatasets[0]?.name || "No generated datasets"}
                 </a>
