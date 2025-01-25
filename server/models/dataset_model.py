@@ -1,7 +1,8 @@
 import uuid
 from enum import Enum
-from ..db.database import db
 from datetime import datetime, timezone
+
+from db.database import db
 
 
 def generate_short_uuid():

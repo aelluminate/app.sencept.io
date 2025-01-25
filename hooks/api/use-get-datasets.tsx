@@ -1,16 +1,8 @@
 "use client"
 import * as React from "react"
-import { FLASK_API_URL } from "@/config/constants"
 
-interface Dataset {
-  category: string
-  filename: string
-  filepath: string
-  filesize: number
-  id: string
-  name: string
-  upload_date: string
-}
+import { FLASK_API_URL } from "@/config/constants"
+import { Dataset, APIResponse } from "@/lib/types/api/use-get-datasets"
 
 export function useGetDatasets() {
   const [data, setData] = React.useState<Dataset[]>([])
@@ -34,8 +26,8 @@ export function useGetDatasets() {
           throw new Error(`Failed to fetch datasets: ${response.statusText}`)
         }
 
-        const result = await response.json()
-        setData(result)
+        const result: APIResponse = await response.json()
+        setData(result.data)
       } catch (err) {
         setError(err instanceof Error ? err.message : "An unknown error occurred")
       } finally {

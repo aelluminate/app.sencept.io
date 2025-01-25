@@ -1,14 +1,11 @@
 "use client"
 import * as React from "react"
-import { FLASK_API_URL } from "@/config/constants"
 
-interface DatasetData {
-  id: string
-  [key: string]: string | number | boolean
-}
+import { FLASK_API_URL } from "@/config/constants"
+import { Dataset } from "@/lib/types/api/use-get-dataset-data"
 
 export function useGetDatasetData(datasetId: string | null) {
-  const [data, setData] = React.useState<DatasetData[]>([])
+  const [data, setData] = React.useState<Dataset[]>([])
   const [isLoading, setIsLoading] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
 

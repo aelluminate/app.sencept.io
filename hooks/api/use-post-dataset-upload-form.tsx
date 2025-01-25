@@ -9,11 +9,10 @@ import { useToast } from "@/hooks/use-toast"
 import { FormSchema } from "@/lib/schema/form-schema"
 import { FormValues } from "@/lib/types/form"
 import { toSlugFormat } from "@/lib/utils/to-slug-format"
-import { UseDatasetFormProps } from "@/lib/types/api"
 
 import { ToastAction } from "@/components/shared/toast/_index"
 
-export function useDatasetForm({ onSuccess }: UseDatasetFormProps = {}) {
+export function usePostDatasetUploadForm({ onSuccess }: { onSuccess?: () => void } = {}) {
   const methods = useForm<FormValues>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
