@@ -82,11 +82,13 @@ export function CreateNewDatasetDialog({ children, onSuccess }: AddDatasetDialog
                     <div className="flex w-full flex-row items-center justify-between text-xs">
                       {inputValue && (
                         <p>
-                          <span className="font-bold">
+                          <span className="font-bold text-blue-500">
+                            &quot;
                             {toSlugFormat(inputValue).substring(
                               0,
                               50 + hyphenCount(toSlugFormat(inputValue)),
-                            )}{" "}
+                            )}
+                            &quot;{" "}
                           </span>
                           will be the new dataset name.
                         </p>
